@@ -7,9 +7,9 @@
 //     response.end();
 // });
 //
-// let add = (x,y) => x + y;
-// let result = add(1,1);
-// console.log(result);
+let add = (x,y) => x + y;
+let result = add(1,1);
+console.log(result);
 //
 // server.listen(port);
 // console.log("Server Running on "+port+".\nLaunch http://localhost:"+port);
