@@ -9,8 +9,7 @@
   "scripts": {
     "start": "node server.js"
   },
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "koa": "^1.2.0"
   }
 }
