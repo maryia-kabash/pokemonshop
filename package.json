@@ -1,6 +1,9 @@
 {
   "name": "pokemonshop",
   "description": "Sample Node app",
+  "engines": {
+    "node": "6.3.0"
+  },
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
