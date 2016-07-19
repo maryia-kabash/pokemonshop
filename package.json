@@ -1,0 +1,12 @@
+{
+  "name": "pokemonshop",
+  "description": "Sample Node app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "koa": "^1.2.0"
+  }
+}
