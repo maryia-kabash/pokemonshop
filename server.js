@@ -1,22 +1,11 @@
-var koa = require('koa');
-var app = koa();
+var http = require("http"),
+    port = process.env.PORT || 1881;
 
-// logger
-
-app.use(function *(next){
-    var start = new Date;
-    yield next;
-    var ms = new Date - start;
-    console.log('%s %s - %s', this.method, this.url, ms);
+var server = http.createServer(function(request,response){
+    response.writeHeader(200, {"Content-Type": "text/plain"});
+    response.write("Hello HTTP!");
+    response.end();
 });
 
-// response
-
-app.use(function *(){
-    this.body = 'Hello Pokemon Shop';
-});
-
-var port = 3000;
-app.listen(port, function() {
-    console.log('Our app is running on http://localhost:' + port);
-});
+server.listen(port);
+console.log("Server Running on "+port+".\nLaunch http://localhost:"+port);

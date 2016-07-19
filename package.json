@@ -3,7 +3,7 @@
   "description": "Sample Node app",
   "engines": {
     "node": "6.3.0",
-    "npm": "3.10.x"
+    "npm": "3.10.3"
   },
   "main": "server.js",
   "scripts": {
