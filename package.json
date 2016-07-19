@@ -2,14 +2,14 @@
   "name": "pokemonshop",
   "description": "Sample Node app",
   "engines": {
-    "node": "6.3.0"
+    "node": "6.3.0",
+    "npm": "3.10.x"
   },
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "koa": "^1.2.0"
   }
 }
