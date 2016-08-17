@@ -1,0 +1,62 @@
+<div class="jumbotron text-center clearfix">
+
+    <h1 class="col-sm-3">{{ main.board.name }}</h1>
+
+    <div class="dashboard-actions col-sm-5">
+        <p>Dashboard actions:</p>
+        <form class="form-inline">
+            <input type="text" ng-model="main.column.name" class="form-control">
+            <input type="submit" ng-click="main.addColumn(main.column)" value="Add new column" class="btn btn-default">
+        </form>
+        <form class="form-inline">
+            <input type="text" ng-model="search.$" class="form-control" placeholder="Search text">
+        </form>
+    </div>
+
+    <div class="dashboard-filters col-sm-4">
+        <p>Filter issues on:</p>
+
+        <ul class="nav navbar-nav">
+            <li class="filter"><div class="btn btn-warning" ng-click="main.clearFilters()">Clear filters</div></li>
+            <li uib-dropdown>
+                <div uib-dropdown-toggle class="btn btn-info">Assignee <span class="caret"></span></div>
+                <ul uib-dropdown-menu>
+                    <li>
+                        <a ng-click="main.filterByUsername(main.currentUser.username)" class="{{main.currentUser.username}} author">Assigned to me</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li ng-repeat="user in main.users">
+                        <a ng-click="main.filterByUsername(user.username)" class="{{user.username}} author">{{ user.username }}</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li uib-dropdown>
+                <div uib-dropdown-toggle class="btn btn-info">Priority <span class="caret"></span></div>
+                <ul uib-dropdown-menu class="priority-list">
+                    <li><a ng-click="main.filterByPriority('p1')" class="p1 priority">Blocker</a></li>
+                    <li><a ng-click="main.filterByPriority('p2')" class="p2 priority">Critical</a></li>
+                    <li><a ng-click="main.filterByPriority('p3')" class="p3 priority">Major</a></li>
+                    <li><a ng-click="main.filterByPriority('p4')" class="p4 priority">Minor</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div ng-model="main.board" id="board">
+    <div id="columns" class="row">
+        <div class="col-xs-{{12/main.board.columns.length}}"
+             ng-repeat="column in main.board.columns" data-columnindex="{{$index}}" id="column{{$index}}" ng-model="column.order" ng-init="column.order=$index">
+            <div class="column">
+                <div class="columnHeader">
+                    <span>{{column.name}} ({{column.bugs.length}})</span>
+                </div>
+                <ul class="cards card-list" as-sortable="main.kanbanSortOptions" ng-model="column.bugs">
+                    <li class="card" ng-repeat="card in filtered = (column.bugs | UserFilter:main.selectedUser | PriorityFilter:main.selectedPriority | filter:search )" card-item="card" as-sortable-item>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

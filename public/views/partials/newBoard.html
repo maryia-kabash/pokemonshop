@@ -1,0 +1,26 @@
+<!-- New Board template -->
+<form ng-submit="create.addNewBoard(create.newboard, create.columns)" class="noMargin" name="newBoardForm">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="create.dismiss()">&times;</button>
+        <h4 class="modal-title" ng-model="boardName">Add New Board: {{ create.newboard.name }}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="control-label">Board title</label>
+            <input type="text" ng-model="create.newboard.name" class="form-control" required>
+        </div>
+        <div ng-repeat="column in create.columns">
+            <div class="form-group">
+                <label class="control-label">Column title</label>
+                <input type="text" ng-model="create.columns[$index].name" class="form-control">
+            </div>
+        </div>
+
+        <div ng-click="create.addMoreColumns()"><span class="addMore">+</span> Add a column</div>
+    </div>
+    <div class="modal-footer">
+        <span>{{ create.message }}</span>
+        <button type="button" class="btn btn-default" ng-click="create.dismiss()">Close</button>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+</form>

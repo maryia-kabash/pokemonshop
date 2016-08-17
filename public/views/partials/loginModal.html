@@ -1,0 +1,43 @@
+<!-- Log in template -->
+<form class="noMargin">
+    <div class="modal-body">
+        <button type="button" class="close" ng-click="login.dismiss()">&times;</button>
+        <h4 class="modal-title">Please log in to start work:</h4>
+            <uib-tabset>
+                <uib-tab heading="Log in">
+                    <form name="login-form" autocomplete="on">
+                        <div class="form-group">
+                            <label class="control-label">User name</label>
+                            <input type="text" ng-model="login.logUsername" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Password</label>
+                            <input type="password" ng-model="login.logPassword" class="form-control">
+                        </div>
+                        <button type="submit" ng-click="login.login(login.logUsername, login.logPassword)" class="btn btn-primary">Log in</button>
+                        <span class="alert-danger">{{ login.message }}</span>
+                    </form>
+                </uib-tab>
+                <uib-tab heading="Sign up">
+                    <form name="signup-form">
+                        <div class="form-group">
+                            <label class="control-label">User name</label>
+                            <input type="text" ng-model="login.signUsername" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <input type="email" ng-model="login.signEmail" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Password</label>
+                            <input type="password" ng-model="login.signPassword" class="form-control">
+                        </div>
+                        <button ng-click="login.signup(login.signUsername, login.signEmail, login.signPassword)" class="btn btn-primary">Sign up</button>
+                        <span class="alert-danger">{{ login.errorMsg }}</span>
+                    </form>
+                </uib-tab>
+            </uib-tabset>
+
+        <button type="button" class="btn btn-default modal-close" ng-click="login.dismiss()">Close</button>
+    </div>
+</form>

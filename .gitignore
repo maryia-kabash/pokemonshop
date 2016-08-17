@@ -29,6 +29,7 @@ build/Release
 # Dependency directories
 node_modules
 jspm_packages
+bower-components
 
 # Optional npm cache directory
 .npm
@@ -39,3 +40,5 @@ jspm_packages
 # IDE
 .idea/*
 .env
+public.build/*
+public/libs/*

@@ -1,0 +1,110 @@
+<div class="jumbotron text-center">
+    <button type="button" class="btn-danger pull-right"  ng-click="edit.deleteBug(edit.bug)" title="Delete this card">&times;</button>
+    <p>{{ edit.bug.name }}</p>
+</div>
+
+<div class="col-md-6 col-md-offset-3">
+    <div class="form-group">
+        <label for="inputSummary" class="control-label">Issue title</label>
+        <input type="text" ng-model="edit.bug.name" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="project">Project</label>
+        <select class="form-control" id="project" ng-model="edit.bug.project">
+            <option value="project1">Project A</option>
+            <option value="project2">Project B</option>
+            <option value="project3">Project C</option>
+            <option value="project4">Project D</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <input type="radio" value="1" ng-model="edit.bug.type" id="type1"><label for="type1">Task</label>
+        <input type="radio" value="2" ng-model="edit.bug.type" id="type2"><label for="type2">Bug</label>
+        <input type="radio" value="3" ng-model="edit.bug.type" id="type3"><label for="type3">Improvement</label>
+        <input type="radio" value="4" ng-model="edit.bug.type" id="type4"><label for="type4">Question</label>
+    </div>
+
+    <div class="form-group">
+        <label for="inputSummary" class="control-label">Summary</label>
+        <input type="text"  ng-model="edit.bug.summary" class="form-control" id="inputSummary">
+    </div>
+
+    <div class="form-group">
+        <label for="priority">Priority</label>
+        <select class="form-control" id="priority" ng-model="edit.bug.priority">
+            <option value="p1">Blocker</option>
+            <option value="p2">Critical</option>
+            <option value="p3" >Major</option>
+            <option value="p4">Minor</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="description" class="control-label">Description</label>
+        <textarea class="form-control" ng-model="edit.bug.descr" rows="5" id="description"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Time spent on the task</label>
+
+        <div class="splitted-input" splitted-input ng-model="split.time">
+            <input splitted-input-field type="number" class="form-control splitted-input-field" size="2" maxlength="2" min="0" max="99" ng-model="split.days">
+            <span>days</span>
+
+            <input splitted-input-field type="number" class="form-control splitted-input-field" size="2" maxlength="2" min="0" max="99" ng-model="split.hours">
+            <span>hours</span>
+
+            <input splitted-input-field type="number" class="form-control splitted-input-field" size="2" maxlength="2" min="0" max="99" ng-model="split.minutes">
+            <span>minutes</span>
+
+            <div class="btn btn-success" ng-click="split.collectData()">save time</div>
+
+            <h5 ng-show="split.time">Tracked time: {{split.time[0]}}d {{split.time[1]}}h {{split.time[2]}}m</h5>
+        </div>
+        <h5 ng-show="edit.bug.time">Total tracked time: {{edit.bug.time[0]}}d {{edit.bug.time[1]}}h {{edit.bug.time[2]}}m</h5>
+    </div>
+
+    <div class="form-group" ng-show="edit.bug.duedate">
+        <label class="control-label">Due date: </label>
+        <p>{{edit.bug.duedate}}</p>
+    </div>
+
+    <button type="submit" ng-click="edit.updateBug(edit.bug)" class="btn btn-default btn-lg btn-success">Update</button>
+    <span>{{ edit.message }}</span>
+</div>
+
+<div class="col-md-6">
+    <h3>Comments</h3>
+
+    <table class="table">
+        <tr ng-repeat="commented in edit.activities.commented">
+            <td>
+                <p><b>{{ commented.author | uppercase }}</b></p>
+                <small class="notes">{{commented.date.$date}}</small>
+            </td>
+            <td>{{ commented.text | HtmlFilter }}</td>
+        </tr>
+    </table>
+
+    <form ng-submit="edit.comment(edit.text)">
+        <div class="form-group">
+            <label class="control-label">Write your comment</label>
+            <textarea ng-model="edit.text" class="form-control" rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+
+<div class="col-md-6">
+    <h3>Activities</h3>
+
+    <p ng-repeat="moved in edit.activities.moved.slice().reverse()">
+        <b>{{ moved.author | uppercase}}</b> moved this issue from
+        "{{ moved.fromColumn }}" to "{{ moved.toColumn }}"
+        <small class="notes">{{moved.date.$date}}</small>
+    </p>
+    <p><b>{{ edit.activities.created.author | uppercase}}</b> created this issue <small class="notes">{{edit.activities.created.date.$date}}</small></p>
+
+</div>
